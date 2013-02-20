@@ -1,7 +1,8 @@
+BUSHEL    ?= syscheck
 PREFIX    ?= /usr/local
 BINDIR    ?= $(PREFIX)/bin
 
-all: syscheck
+all: $(BUSHEL)
 
 release:
 	cat install.sh | sed "s/VERSION=.*/VERSION=`cat VERSION`/" > install.sh
@@ -13,7 +14,7 @@ release:
 
 install:
 	mkdir -p $(BINDIR)
-	install bin/syscheck $(BINDIR)/
+	install $(BUSHEL) $(BINDIR)/
 
 uninstall:
-	rm -f $(BINDIR)/syscheck
+	rm -f $(BINDIR)/$(BUSHEL)
