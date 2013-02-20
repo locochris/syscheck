@@ -1,0 +1,87 @@
+#!/usr/bin/env shpec
+
+run() {
+  $@ | sed 's/^/      /g'
+}
+
+assert_process_count() {
+  pattern=`echo $1 | sed 's/\(.\)/[\1]/'`
+  expected_count=$2
+  process_list=`ps waux|grep "$pattern"`
+  echo "$process_list" |
+    sed 's/^/      /g' |
+    sed 's/[ ]*$//g'  # for ?some? reason unicorn jobs have a bunch of ugly trailing whitespace
+  process_count=`[[ -z $process_list ]] && echo 0 || echo "$process_list"|wc -l`
+  assert equal $process_count $expected_count
+}
+
+number_of_cores_for_Darwin() {
+  sysctl hw.ncpu | awk '{print $2}'
+}
+
+number_of_cores_for_Linux() {
+  grep 'model name' /proc/cpuinfo | wc -l
+}
+
+memory_for_Darwin() {
+  vm_stat
+}
+
+memory_for_Linux() {
+  free
+}
+
+memory_percentage_free_for_Darwin() {
+  vm_buf=$(vm_stat)
+  page_size=$(echo "$vm_buf" | grep 'page size' | awk '{ print $8 }')
+  free_blocks=$(echo "$vm_buf" | grep free | awk '{ print $3 }' | sed 's/\.//')
+  inactive_blocks=$(echo "$vm_buf" | grep inactive | awk '{ print $3 }' | sed 's/\.//')
+  speculative_blocks=$(echo "$vm_buf" | grep speculative | awk '{ print $3 }' | sed 's/\.//')
+
+  mem_size=$(sysctl hw.memsize | awk '{ print $2 }')
+
+  free=$((($free_blocks+speculative_blocks)))
+  inactive=$(($inactive_blocks))
+  total=$((($page_size*($free+$inactive))))
+
+  echo $((((100 * $total)/$mem_size)))
+}
+
+memory_percentage_free_for_Linux() {
+  free | grep "buffers/cache" | awk '{print int($4/($3+$4) * 100)}'
+}
+
+cmd_for() {
+  ${1}_for_`uname -s`
+}
+
+describe 'memory'
+  it "should have more than ${MIN_MEMORY_FREE:=20}% free"
+    run cmd_for memory
+    memory_free=`cmd_for memory_percentage_free`
+    run echo "=> memory_free: ${memory_free}%"
+    assert gt $memory_free $MIN_MEMORY_FREE
+end_describe
+
+describe 'disk'
+  IFS=`echo -en "\n\b"`
+  mount_points=`mount | grep '^/dev/' | sed 's/.*on //g' | sed 's/ (.*//g'`
+  run df -Ph $mount_points
+  disk_free_percent() {
+    df -Ph "${1:-/}" | grep '^/dev' | awk '{print 100 - $5}' | sed 's/%//'
+  }
+  for mount_point in $mount_points; do
+    it "should have more than ${MIN_DISK_FREE:=20}% free on $mount_point"
+      disk_free=`disk_free_percent $mount_point`
+      run echo "=> disk_free($mount_point): ${disk_free}%"
+      assert gt $disk_free $MIN_DISK_FREE
+  done
+end_describe
+
+describe 'load'
+  it "should have a 15m load value of less than 1 times the number of cores"
+    run uptime
+    load_15m=`uptime | sed -e 's/^.*[a-z]: //; s/[, ].*//'`
+    run echo "=> load_15m: $load_15m"
+    assert lt $load_15m `cmd_for number_of_cores`
+end_describe
