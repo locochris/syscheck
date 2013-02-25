@@ -5,6 +5,8 @@ VERSION=0.0.2
 
 DEPENDENCIES=shpec/shpec:0.0.3
 
+TMPDIR=${TMPDIR:-/tmp}
+
 install_dependencies() {
   for dependency_and_version in $@; do
     dependency=`echo $dependency_and_version|cut -d: -f1`
