@@ -1,6 +1,6 @@
 syscheck [![Build Status](https://travis-ci.org/locochris/syscheck.png)](https://travis-ci.org/locochris/syscheck)
 ----
-Check your system status
+Check your system status (built on top of [shpec](http://github.com/shpec/shpec))
 
 ## Installation
 ```bash
