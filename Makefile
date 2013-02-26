@@ -14,7 +14,7 @@ release:
 
 install:
 	mkdir -p $(BINDIR)
-	install $(BUSHEL) $(BINDIR)/
+	install bin/$(BUSHEL) $(BINDIR)/
 
 uninstall:
 	rm -f $(BINDIR)/$(BUSHEL)
