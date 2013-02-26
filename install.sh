@@ -27,7 +27,7 @@ install_pkg() {
   cd $TMPDIR
   curl -sL https://github.com/${org}/${pkg}/archive/${version}.tar.gz | tar zxf -
   cd $pkgdir
-  sudo make install
+  make install
   cd $TMPDIR
   rm -rf $PKGDIR
 }

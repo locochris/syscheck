@@ -4,7 +4,7 @@ Check your system status
 
 ## Installation
 ```bash
-sh -c "`curl https://raw.github.com/locochris/syscheck/master/install.sh`"
+sudo sh -c "`curl https://raw.github.com/locochris/syscheck/master/install.sh`"
 ```
 
 ## Usage

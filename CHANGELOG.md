@@ -3,6 +3,7 @@
 ## 0.0.2 Unreleased
 
  * Need to explicitly call checks
+ * Remove sudo from install
 
 ## 0.0.1 (Feb 20, 2013)
 
