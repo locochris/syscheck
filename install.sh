@@ -1,7 +1,7 @@
 #!/bin/sh -ex
 ORG=locochris
 PKG=syscheck
-VERSION=0.0.2
+VERSION=0.0.3
 
 DEPENDENCIES=shpec/shpec:0.0.6
 
