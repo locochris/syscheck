@@ -8,7 +8,13 @@ sudo sh -c "`curl https://raw.github.com/locochris/syscheck/master/install.sh`"
 ```
 
 ## Usage
-Place in a wrapper script like so:
+Run default syschecks
+
+```bash
+MIN_MEMORY_FREE=5 MIN_DISK_FREE=5 syscheck
+```
+
+Or, place in a wrapper script like so:
 
 ```bash
 #!/usr/bin/env syscheck
