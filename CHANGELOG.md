@@ -1,8 +1,12 @@
 # syscheck Changelog
 
-## 0.0.3 Unreleased
+## 0.0.4 Unreleased
 
  *
+
+## 0.0.3 (Feb 27 2013)
+
+ * Bugfix for disk check on centos
 
 ## 0.0.2 (Feb 27 2013)
 

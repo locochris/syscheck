@@ -92,8 +92,8 @@ check_disk() {
   describe 'disk'
     old_IFS=$IFS
     IFS=`echo -en "\n\b"`
-    mount_points=`mount | grep '^/dev/' | sed 's/.*on //g' | sed 's/ (.*//g'`
-    run df -Ph $mount_points
+    mount_points=`mount | grep '^/dev/' | sed 's/.*on //g' | sed 's/ type .*(/ (/g' | sed 's/ (.*//g'`
+    run df -h $mount_points
     disk_free_percent() {
       df -Ph "${1:-/}" | grep '^/dev' | awk '{print 100 - $5}' | sed 's/%//'
     }
