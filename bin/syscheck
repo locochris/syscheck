@@ -4,6 +4,11 @@
 bc_expr() {
   print_result "[[ $(bc <<< $1) = 1 ]]" "Expected bc expression '$1' to be true"
 }
+
+still_alive() {
+  ping -oc1 "$1" > /dev/null 2>&1
+  assert equal "$?" 0
+}
 # Custom Matchers
 
 run() {
@@ -103,7 +108,14 @@ check_load() {
   end_describe
 }
 
-default_system_checks="memory disk load"
+check_network() {
+  describe 'network'
+    it "can see github.com"
+      assert still_alive "github.com"
+  end_describe
+}
+
+default_system_checks="memory disk load network"
 check_system() {
   for c in ${@:-$default_system_checks}; do
     func="check_${c}"

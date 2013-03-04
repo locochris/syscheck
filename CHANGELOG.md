@@ -2,7 +2,9 @@
 
 ## 0.0.4 Unreleased
 
- *
+ * Add network check using still_alive custom matcher
+ * Use `bc_expr` custom matcher
+ * Check shpec version when installing
 
 ## 0.0.3 (Feb 27 2013)
 
