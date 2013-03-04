@@ -1,6 +1,10 @@
 # syscheck Changelog
 
-## 0.0.4 Unreleased
+## 0.0.5 Unreleased
+
+ *
+
+## 0.0.4 (Mar 5 2013)
 
  * Add network check using still_alive custom matcher
  * Use `bc_expr` custom matcher
