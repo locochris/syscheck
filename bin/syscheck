@@ -1,4 +1,4 @@
-#!/usr/bin/env shpec
+#!/usr/bin/env SHPEC_ROOT=. shpec
 
 alias_function() {
   eval "$(echo "${1}()"; declare -f $2 | tail -n +2)"
