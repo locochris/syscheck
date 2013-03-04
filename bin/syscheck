@@ -1,24 +1,10 @@
 #!/usr/bin/env SHPEC_ROOT=. shpec
 
-alias_function() {
-  eval "$(echo "${1}()"; declare -f $2 | tail -n +2)"
-}
-
-# Waiting for these to get merged into shpec
+# Custom Matchers
 bc_expr() {
- echo "[[ $(bc <<< $1) = 1 ]]"
+  print_result "[[ $(bc <<< $1) = 1 ]]" "Expected bc expression '$1' to be true"
 }
-
-alias_function _assert assert
-assert() {
-  case "x$1" in
-  xbc_expr )
-    print_result "$(bc_expr "$2")" "Expected $2 to be true";;
-  * )
-    _assert $@
-  esac
-}
-# Waiting for these to get merged into shpec
+# Custom Matchers
 
 run() {
   $@ | sed 's/^/      /g'
@@ -101,7 +87,7 @@ check_disk() {
       it "should have more than ${MIN_DISK_FREE:=20}% free on $mount_point"
         disk_free=`disk_free_percent $mount_point`
         run echo "=> disk_free($mount_point): ${disk_free}%"
-        assert gt $disk_free $MIN_DISK_FREE
+        assert bc_expr "$disk_free > $MIN_DISK_FREE"
     done
     IFS=$old_IFS
   end_describe
