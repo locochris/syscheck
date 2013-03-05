@@ -5,16 +5,20 @@ BINDIR    ?= $(PREFIX)/bin
 all: $(BUSHEL)
 
 release:
-	cat install.sh | sed "s/VERSION=.*/VERSION=`cat VERSION`/" > install.sh
+	sed -i '' "s/^VERSION=.*/VERSION=`cat VERSION`/" install.sh
 	git add install.sh VERSION
 	[ -n "`git status --porcelain`" ] && git commit -m "Release `cat VERSION`" || true
 	git push origin master
-	git tag `cat VERSION`
+	$(eval current_version=$(shell cat VERSION))
+	git tag $(current_version)
 	git push --tags
-	@read -p "Enter new version number (currently `cat VERSION`)> " version; \
-	echo $$version > VERSION
-	git add VERSION
+	@read -p "Enter new version number (currently $(current_version))> " new_version; \
+	cat CHANGELOG.md | sed "s/^## $(current_version) Unreleased/## $$new_version Unreleased== *==## $(current_version) ($(shell date +'%b %e %Y'))/" | tr "=" "\n" > CHANGELOG.md.new; \
+	mv CHANGELOG.md.new CHANGELOG.md; \
+	echo $$new_version > VERSION
+	git add VERSION CHANGELOG.md
 	git commit -m "Ready for new release"
+	git push origin master
 
 install:
 	mkdir -p $(BINDIR)
