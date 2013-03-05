@@ -1,8 +1,12 @@
 # syscheck Changelog
 
-## 0.0.6 Unreleased
+## 0.0.7 Unreleased
 
  *
+
+## 0.0.6 (Mar  6 2013)
+
+ * Add centos friendly still_alive_ping command
 
 ## 0.0.5 (Mar 5 2013)
 
