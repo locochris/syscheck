@@ -11,6 +11,10 @@ release:
 	git push origin master
 	git tag `cat VERSION`
 	git push --tags
+	@read -p "Enter new version number (currently `cat VERSION`)> " version; \
+	echo $$version > VERSION
+	git add VERSION
+	git commit -m "Ready for new release"
 
 install:
 	mkdir -p $(BINDIR)
