@@ -115,12 +115,12 @@ check_network() {
   end_describe
 }
 
-default_system_checks="memory disk load network"
+DEFAULT_SYSTEM_CHECKS="memory disk load network"
 check_system() {
-  for c in ${@:-$default_system_checks}; do
+  for c in $@; do
     func="check_${c}"
     type $func 2> /dev/null | grep -q 'function' && $func
   done
 }
 
-shift; [[ ! "$@" ]] && check_system
+check_system ${SYSTEM_CHECKS:-$DEFAULT_SYSTEM_CHECKS}

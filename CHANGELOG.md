@@ -1,8 +1,12 @@
 # syscheck Changelog
 
-## 0.0.5 Unreleased
+## 0.0.6 Unreleased
 
  *
+
+## 0.0.5 (Mar 5 2013)
+
+ * Add support for SYSTEM_CHECKS env variable
 
 ## 0.0.4 (Mar 5 2013)
 
