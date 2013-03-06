@@ -6,7 +6,7 @@
 
 ## 0.0.7 (Mar  6 2013)
 
- *
+ * Bugfix for /usr/bin/env not accepting env variables
 
 ## 0.0.6 (Mar  6 2013)
 
