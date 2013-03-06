@@ -1,4 +1,4 @@
-#!/usr/bin/env SHPEC_ROOT=. shpec
+#!/usr/bin/env shpec
 
 # Custom Matchers
 bc_expr() {
