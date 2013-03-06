@@ -8,11 +8,11 @@
 
  * Add centos friendly still_alive_ping command
 
-## 0.0.5 (Mar 5 2013)
+## 0.0.5 (Mar  5 2013)
 
  * Add support for SYSTEM_CHECKS env variable
 
-## 0.0.4 (Mar 5 2013)
+## 0.0.4 (Mar  5 2013)
 
  * Add network check using still_alive custom matcher
  * Use `bc_expr` custom matcher

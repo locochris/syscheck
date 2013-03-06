@@ -3,7 +3,7 @@ ORG=locochris
 PKG=syscheck
 VERSION=0.0.6
 
-DEPENDENCIES=shpec/shpec:0.0.7
+DEPENDENCIES=shpec/shpec:0.0.8
 
 TMPDIR=${TMPDIR:-/tmp}
 
