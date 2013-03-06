@@ -1,6 +1,10 @@
 # syscheck Changelog
 
-## 0.0.7 Unreleased
+## 0.0.8 Unreleased
+
+ *
+
+## 0.0.7 (Mar  6 2013)
 
  *
 
