@@ -1,6 +1,10 @@
 # syscheck Changelog
 
-## 0.0.8 Unreleased
+## 0.0.9 Unreleased
+
+ *
+
+## 0.0.8 (Mar  8 2013)
 
  * Use shpec v0.0.9 (SHPEC_ROOT without using find)
 
