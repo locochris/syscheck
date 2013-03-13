@@ -1,6 +1,10 @@
 # syscheck Changelog
 
-## 0.0.9 Unreleased
+## 0.0.10 Unreleaseed
+
+ *
+
+## 0.0.9 (Mar 14 2013)
 
  * Increase the count and timeout in still_alive assertion
 
