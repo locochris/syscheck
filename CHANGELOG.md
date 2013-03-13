@@ -2,7 +2,7 @@
 
 ## 0.0.9 Unreleased
 
- *
+ * Increase the count and timeout in still_alive assertion
 
 ## 0.0.8 (Mar  8 2013)
 
