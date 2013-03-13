@@ -28,11 +28,11 @@ its_process_count() {
 }
 
 still_alive_ping_for_Darwin() {
-  ping -oc1 "$1"
+  ping -oc2 "$1"
 }
 
 still_alive_ping_for_Linux() {
-  ping -q -w 1 -c 1 $1
+  ping -q -w 3 -c 2 "$1"
 }
 
 number_of_cores_for_Darwin() {
