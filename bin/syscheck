@@ -6,8 +6,15 @@ bc_expr() {
 }
 
 still_alive() {
-  cmd_for still_alive_ping $1 > /dev/null 2>&1
-  assert equal "$?" 0
+  local tries_remaining=3
+  local ping_result=0
+  until [ $tries_remaining -eq 0 ] || cmd_for still_alive_ping "$1" > /dev/null 2>&1; do
+    ping_result=$?
+    echo "$ping_result - $tries_remaining"
+    sleep 1
+    let "tries_remaining -= 1"
+  done
+  assert equal "$ping_result" 0
 }
 # Custom Matchers
 
@@ -28,11 +35,11 @@ its_process_count() {
 }
 
 still_alive_ping_for_Darwin() {
-  ping -oc2 "$1"
+  ping -oc1 "$1"
 }
 
 still_alive_ping_for_Linux() {
-  ping -q -w 3 -c 2 "$1"
+  ping -q -w 1 -c 1 "$1"
 }
 
 number_of_cores_for_Darwin() {
@@ -119,8 +126,8 @@ check_load() {
 
 check_network() {
   describe 'network'
-    it "can see github.com"
-      assert still_alive "github.com"
+    it "can see ${PING_HOST:=github.com}"
+      assert still_alive $PING_HOST
   end_describe
 }
 

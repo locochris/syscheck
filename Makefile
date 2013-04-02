@@ -13,6 +13,7 @@ release:
 	git tag $(current_version)
 	git push --tags
 	@read -p "Enter new version number (currently $(current_version))> " new_version; \
+	$${EDITOR:-vi} CHANGELOG.md
 	cat CHANGELOG.md | sed "s/^## $(current_version) Unreleased/## $$new_version Unreleased== *==## $(current_version) ($(shell date +'%b %e %Y'))/" | tr "=" "\n" > CHANGELOG.md.new; \
 	mv CHANGELOG.md.new CHANGELOG.md; \
 	echo $$new_version > VERSION
