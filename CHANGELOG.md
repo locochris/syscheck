@@ -1,8 +1,8 @@
 # syscheck Changelog
 
-## 0.0.10 Unreleaseed
+## 0.0.10 (Apr  2 2013)
 
- * Windback count and timeout in still_alive assertion (and put in a retry loop)
+ * Wind back count and timeout in still_alive assertion (and put in a retry loop)
 
 ## 0.0.9 (Mar 14 2013)
 
