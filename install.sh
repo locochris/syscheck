@@ -12,7 +12,7 @@ install_dependencies() {
     dependency=`echo $dependency_and_version|cut -d: -f1`
     version=`echo $dependency_and_version|cut -d: -f2`
     if ! command -v shpec >/dev/null 2>&1 || [ `shpec --version` != $version ]; then
-      sh -c "`curl https://raw.github.com/$dependency/master/install.sh`"
+      sh -c "`curl -sL https://raw.github.com/$dependency/master/install.sh`"
     fi
   done
 }
