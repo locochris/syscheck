@@ -4,7 +4,7 @@ Check your system status (built on top of [shpec](http://github.com/shpec/shpec)
 
 ## Installation
 ```bash
-sudo sh -c "`curl https://raw.github.com/locochris/syscheck/master/install.sh`"
+sudo sh -c "`curl --silent --location https://raw.githubusercontent.com/locochris/syscheck/master/install.sh`"
 ```
 
 ## Usage

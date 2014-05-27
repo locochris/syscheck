@@ -1,7 +1,7 @@
 #!/bin/sh -ex
 ORG=locochris
 PKG=syscheck
-VERSION=0.0.10
+VERSION=0.0.11
 
 DEPENDENCIES=shpec/shpec:0.0.9
 
@@ -12,7 +12,7 @@ install_dependencies() {
     dependency=`echo $dependency_and_version|cut -d: -f1`
     version=`echo $dependency_and_version|cut -d: -f2`
     if ! command -v shpec >/dev/null 2>&1 || [ `shpec --version` != $version ]; then
-      sh -c "`curl -sL https://raw.github.com/$dependency/master/install.sh`"
+      sh -c "`curl --silent --location https://raw.githubusercontent.com/$dependency/master/install.sh`"
     fi
   done
 }
