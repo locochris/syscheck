@@ -1,9 +1,9 @@
 #!/bin/sh -ex
 ORG=locochris
 PKG=syscheck
-VERSION=0.0.11
+VERSION=0.0.12
 
-DEPENDENCIES=shpec/shpec:0.0.9
+DEPENDENCIES=shpec/shpec:0.1.0
 
 TMPDIR=${TMPDIR:-/tmp}
 

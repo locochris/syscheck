@@ -32,6 +32,7 @@ its_process_count() {
   process_count=`[[ -z $process_list ]] && echo 0 || echo "$process_list"|wc -l`
   it "should have $expected_count '$1' processes"
     assert equal $process_count $expected_count
+  end
 }
 
 still_alive_ping_for_Darwin() {
@@ -92,7 +93,7 @@ check_memory() {
       memory_free=`cmd_for memory_percentage_free`
       run echo "=> memory_free: ${memory_free}%"
       assert gt $memory_free $MIN_MEMORY_FREE
-  end_describe
+  end
 }
 
 check_disk() {
@@ -111,7 +112,7 @@ check_disk() {
         assert bc_expr "$disk_free > $MIN_DISK_FREE"
     done
     IFS=$old_IFS
-  end_describe
+  end
 }
 
 check_load() {
@@ -121,14 +122,14 @@ check_load() {
       load_15m=`uptime | sed -e 's/^.*[a-z]: //; s/[, ].*//'`
       run echo "=> load_15m: $load_15m"
       assert bc_expr "$load_15m < `cmd_for number_of_cores`"
-  end_describe
+  end
 }
 
 check_network() {
   describe 'network'
     it "can see ${PING_HOST:=github.com}"
       assert still_alive $PING_HOST
-  end_describe
+  end
 }
 
 DEFAULT_SYSTEM_CHECKS="memory disk load network"
