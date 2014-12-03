@@ -93,6 +93,7 @@ check_memory() {
       memory_free=`cmd_for memory_percentage_free`
       run echo "=> memory_free: ${memory_free}%"
       assert gt $memory_free $MIN_MEMORY_FREE
+    end
   end
 }
 
@@ -110,6 +111,7 @@ check_disk() {
         disk_free=`disk_free_percent $mount_point`
         run echo "=> disk_free($mount_point): ${disk_free}%"
         assert bc_expr "$disk_free > $MIN_DISK_FREE"
+      end
     done
     IFS=$old_IFS
   end
@@ -122,6 +124,7 @@ check_load() {
       load_15m=`uptime | sed -e 's/^.*[a-z]: //; s/[, ].*//'`
       run echo "=> load_15m: $load_15m"
       assert bc_expr "$load_15m < `cmd_for number_of_cores`"
+    end
   end
 }
 
@@ -129,6 +132,7 @@ check_network() {
   describe 'network'
     it "can see ${PING_HOST:=github.com}"
       assert still_alive $PING_HOST
+    end
   end
 }
 

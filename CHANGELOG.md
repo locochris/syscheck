@@ -1,5 +1,9 @@
 # syscheck Changelog
 
+## 0.0.13 (Dec  3 2014)
+
+ * Fix indentation
+
 ## 0.0.12 (Dec  3 2014)
 
  * Use new shpec v0.1.0 syntax
