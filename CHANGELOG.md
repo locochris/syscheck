@@ -1,5 +1,9 @@
 # syscheck Changelog
 
+## 0.0.12 (Dec  3 2014)
+
+ * Use new shpec v0.1.0 syntax
+
 ## 0.0.10 (Apr  2 2013)
 
  * Wind back count and timeout in still_alive assertion (and put in a retry loop)
